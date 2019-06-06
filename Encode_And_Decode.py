@@ -36,7 +36,7 @@ def encode(input_name):
 
 			#checks if the word is currently in our list
 			Index_Of_Word = Check_If_In_List(word)
-			
+
 			#handles new words
 			if Index_Of_Word == -1:
 				Number_Of_Words = Number_Of_Words + 1
@@ -86,7 +86,7 @@ def decode(input_name):
 			Output_file.write('\n')
 			Previously_Was_New_Line = 1
 			ch = Input_file.read(1)
-		
+
 		#handling word codes
 		if ch != '' and ord(ch) > 128 and ord(ch) != 10:
 			Word_index = Index_Decode(ch,Input_file)
@@ -180,3 +180,8 @@ def Index_Decode(First_Code,Input_file):
 		Thrid_Code = ord(Thrid_Code)
 		Index = Index + Second_Code + Thrid_Code
 	return Index
+
+def Add_To_Word_List(Word):
+	#Function used in Testing
+	Word_List.insert(0, Word)
+	return
