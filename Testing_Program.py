@@ -3,17 +3,43 @@ import Encode_And_Decode
 
 class TestEncode_And_Decode(unittest.TestCase):
 
-	def test_AddtoList(self):
+	#testing the Add_To_Word_List method
+	def test_Add_To_Word_List(self):
 		#arrange
 		Encode_And_Decode.Add_To_Word_List("Hello")
 		Encode_And_Decode.Add_To_Word_List("Day")
 
 		#act
-		Global_List = Encode_And_Decode.Word_List
+		Current_Global_List = Encode_And_Decode.Word_List
 
 		#assert
-		self.assertEqual(Global_List, ["Day", "Hello"])
+		self.assertEqual(Current_Global_List, ["Day", "Hello"])
 
+	def test_Clear_Word_List(self):
+		#arrange
+		Encode_And_Decode.Add_To_Word_List("Hello")
+		Encode_And_Decode.Add_To_Word_List("Day")
+
+		#act
+		Encode_And_Decode.Clear_Word_List()
+		Current_Global_List = Encode_And_Decode.Word_List
+
+		#assert
+		self.assertEqual(Current_Global_List, [])
+
+	#method used to set up a word_list for testing
+	#this is not a test but a useful method to use for testing
+	def Setup_Method(self):
+		#arrange
+		#clear the list of previous elements
+		Encode_And_Decode.Clear_Word_List()
+		#add a few random elements to work with
+		Encode_And_Decode.Add_To_Word_List("Hello")
+		Encode_And_Decode.Add_To_Word_List("Day")
+		Encode_And_Decode.Add_To_Word_List("Job")
+		Encode_And_Decode.Add_To_Word_List("Birthday")
+
+	#testing the Check_If_In_List method
 	def test_Check_If_In_List_Correct_First_Position(self):
 		#arrange
 		Encode_And_Decode.Add_To_Word_List("Hello")
@@ -27,10 +53,7 @@ class TestEncode_And_Decode(unittest.TestCase):
 
 	def test_Check_If_In_List_Correct_Middle_Position(self):
 		#arrange
-		Encode_And_Decode.Add_To_Word_List("Hello")
-		Encode_And_Decode.Add_To_Word_List("Day")
-		Encode_And_Decode.Add_To_Word_List("Job")
-		Encode_And_Decode.Add_To_Word_List("Birthday")
+		self.Setup_Method()
 
 		#act
 		List_Index = Encode_And_Decode.Check_If_In_List("Day")
@@ -40,10 +63,7 @@ class TestEncode_And_Decode(unittest.TestCase):
 
 	def test_Check_If_In_List_Correct_Last_Position(self):
 		#arrange
-		Encode_And_Decode.Add_To_Word_List("Hello")
-		Encode_And_Decode.Add_To_Word_List("Day")
-		Encode_And_Decode.Add_To_Word_List("Job")
-		Encode_And_Decode.Add_To_Word_List("Birthday")
+		self.Setup_Method()
 
 		#act
 		List_Index = Encode_And_Decode.Check_If_In_List("Hello")
@@ -53,10 +73,7 @@ class TestEncode_And_Decode(unittest.TestCase):
 
 	def test_Check_If_In_List_Not_In_List(self):
 		#arrange
-		Encode_And_Decode.Add_To_Word_List("Hello")
-		Encode_And_Decode.Add_To_Word_List("Day")
-		Encode_And_Decode.Add_To_Word_List("Job")
-		Encode_And_Decode.Add_To_Word_List("Birthday")
+		self.Setup_Method()
 
 		#act
 		List_Index = Encode_And_Decode.Check_If_In_List("Name")
@@ -64,6 +81,39 @@ class TestEncode_And_Decode(unittest.TestCase):
 		#assert
 		self.assertEqual(List_Index, -1)
 
+	#testing the Move_Word_To_Front_Of_List method
+	def test_Move_Word_To_Front_Of_List_From_Front(self):
+		#arrange
+		self.Setup_Method()
+
+		#act
+		Encode_And_Decode.Move_Word_To_Front_Of_List(0)
+		Current_Global_List = Encode_And_Decode.Word_List
+
+		#assert
+		self.assertEqual(Current_Global_List, ["Birthday", "Job", "Day", "Hello"])
+
+	def test_Move_Word_To_Front_Of_List_From_Middle(self):
+		#arrange
+		self.Setup_Method()
+
+		#act
+		Encode_And_Decode.Move_Word_To_Front_Of_List(2)
+		Current_Global_List = Encode_And_Decode.Word_List
+
+		#assert
+		self.assertEqual(Current_Global_List, ["Day", "Birthday", "Job", "Hello"])
+
+	def test_Move_Word_To_Front_Of_List_From_End(self):
+		#arrange
+		self.Setup_Method()
+
+		#act
+		Encode_And_Decode.Move_Word_To_Front_Of_List(3)
+		Current_Global_List = Encode_And_Decode.Word_List
+
+		#assert
+		self.assertEqual(Current_Global_List, ["Hello", "Birthday", "Job", "Day"])
 
 if __name__ == '__main__':
 	unittest.main()
