@@ -115,5 +115,18 @@ class TestEncode_And_Decode(unittest.TestCase):
 		#assert
 		self.assertEqual(Current_Global_List, ["Hello", "Birthday", "Job", "Day"])
 
+	#this test exposes a flaw in Move_Word_To_Front_Of_List (can not handle negative indexes)
+	#def test_Move_Word_To_Front_Of_List_With_Negative(self):
+	#	#arrange
+	#	self.Setup_Method()
+	#
+	#	#act
+	#	Encode_And_Decode.Move_Word_To_Front_Of_List(-1)
+	#	Current_Global_List = Encode_And_Decode.Word_List
+	#
+	#	#assert
+	#	self.assertEqual(Current_Global_List, ["Hello", "Birthday", "Job", "Day"])
+
+
 if __name__ == '__main__':
 	unittest.main()
