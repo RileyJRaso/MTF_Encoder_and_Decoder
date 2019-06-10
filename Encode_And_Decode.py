@@ -148,6 +148,7 @@ def Word_Coding(Number_Of_Words):
 
 def Move_Word_To_Front_Of_List(Index_Of_Word):
 	#moves word to front of the list
+	#assert the Index passed is positive (Testing has shown negative does not work)
 	global Word_List
 
 	Temp_Hold_Word = Word_List[Index_Of_Word]
@@ -184,4 +185,9 @@ def Index_Decode(First_Code,Input_file):
 def Add_To_Word_List(Word):
 	#Function used in Testing
 	Word_List.insert(0, Word)
+	return
+
+def Clear_Word_List():
+	#Function used in Testing
+	del Word_List[:]
 	return
