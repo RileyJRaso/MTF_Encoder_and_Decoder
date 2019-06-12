@@ -127,6 +127,35 @@ class TestEncode_And_Decode(unittest.TestCase):
 	#	#assert
 	#	self.assertEqual(Current_Global_List, ["Hello", "Birthday", "Job", "Day"])
 
+	def test_Word_Coding_Under_121(self):
+		#arrange
+		Word_Index = 2
+
+		#act
+		Word_Code = Encode_And_Decode.Word_Coding(Word_Index)
+
+		#assert
+		self.assertEqual(Word_Code, chr(130))
+
+	def test_Word_Coding_Between_121_and_374(self):
+		#arrange
+		Word_Index = 245
+
+		#act
+		Word_Code = Encode_And_Decode.Word_Coding(Word_Index)
+
+		#assert
+		self.assertEqual(Word_Code, chr(121 + 128) + chr(245 - 121))
+
+	def test_Word_Coding_Over_375(self):
+		#arrange
+		Word_Index = 500
+
+		#act
+		Word_Code = Encode_And_Decode.Word_Coding(Word_Index)
+
+		#assert
+		self.assertEqual(Word_Code, chr(122 + 128) + chr((500 - 376) // 256) + chr((500 - 376) % 256))
 
 if __name__ == '__main__':
 	unittest.main()
