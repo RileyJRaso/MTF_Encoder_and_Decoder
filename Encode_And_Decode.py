@@ -9,13 +9,14 @@ MAGIC_NUMBER_2 = chr(0xBA) + chr(0x5E) + chr(0xBA) + chr(0x12)
 Word_List = []
 
 def encode(input_name):
+
 	#creates name for output file
 	(base_name, _, _) = input_name.rpartition(".")
 	output_name = base_name + "." + "mtf"
 
 	#handling input/output files
-	Input_file = open(input_name, encoding = "latin-1", mode = "r",  newline="")
-	Output_file = open(output_name, encoding = "latin-1", mode = "w+",  newline="")
+	Input_file = open(input_name, encoding = "latin-1", mode = "r", newline="")
+	Output_file = open(output_name, encoding = "latin-1", mode = "w+", newline="")
 
 	#writing file coding to output file
 	Output_file.write(MAGIC_NUMBER_2)
@@ -56,9 +57,11 @@ def encode(input_name):
 
 	Output_file.close()
 	Input_file.close()
-	exit(0)
+	Clear_Word_List()
+	return
 
 def decode(input_name):
+
 	#output filename creation
 	(base_name, _, _) = input_name.rpartition(".")
 	output_name = base_name + "." + "txt"
@@ -120,7 +123,8 @@ def decode(input_name):
 
 	Output_file.close()
 	Input_file.close()
-	exit(0)
+	Clear_Word_List()
+	return
 
 def Check_If_In_List(Current_Word):
 	#checks our list for the word
@@ -188,6 +192,6 @@ def Add_To_Word_List(Word):
 	return
 
 def Clear_Word_List():
-	#Function used in Testing
+	#Function used to clear the word list after every use
 	del Word_List[:]
 	return
