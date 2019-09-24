@@ -3,6 +3,16 @@ import Encode_And_Decode
 
 class TestEncode_And_Decode(unittest.TestCase):
 
+	def Set_up_for_Decode(self):
+		with open('test00(answer).txt', encoding = "latin-1", mode = "r", newline="") as f:
+        		Answer = f.read()
+		return Answer
+
+	def Set_up_for_Encode(self):
+		with open('test00(answer).mtf', encoding = "latin-1", mode = "r", newline="") as f:
+        		Answer = f.read()
+		return Answer
+
 	#testing the Add_To_Word_List method
 	def test_Add_To_Word_List(self):
 		#arrange
@@ -156,6 +166,30 @@ class TestEncode_And_Decode(unittest.TestCase):
 
 		#assert
 		self.assertEqual(Word_Code, chr(122 + 128) + chr((500 - 376) // 256) + chr((500 - 376) % 256))
+
+	def test_Decode(self):
+		#arrange
+		final_file_text = self.Set_up_for_Decode()
+
+		#act
+		Encode_And_Decode.decode("test2.mtf")
+		with open('test2.txt', encoding = "latin-1", mode = "r", newline="") as f:
+        		Answer = f.read()
+
+		#assert
+		self.assertEqual(Answer, final_file_text)
+
+	def test_Encode(self):
+		#arrange
+		final_file_text = self.Set_up_for_Encode()
+
+		#act
+		Encode_And_Decode.encode("test1.txt")
+		with open('test1.mtf', encoding = "latin-1", mode = "r", newline="") as f:
+        		Answer = f.read()
+
+		#assert
+		self.assertEqual(Answer, final_file_text)
 
 if __name__ == '__main__':
 	unittest.main()
